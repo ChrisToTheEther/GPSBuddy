@@ -2,6 +2,11 @@
 
 A fun little ESP32-S3 GPS project that might evolve into a little tomogatchi GPS signal eater.
 
+
+<img src="https://github.com/ChrisToTheEther/GPSBuddy/blob/main/GPSBuddyProto.png" alt="breadboard prototype" width="300" height="200">
+
+
+
 ## Arduino CLI commands:
 
 ```bash
