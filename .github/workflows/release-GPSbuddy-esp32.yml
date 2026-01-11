@@ -38,7 +38,9 @@ jobs:
 
       - name: Install libraries
         run: |
-          arduino-cli lib install TinyGPSPlus
+          arduino-cli lib install "Adafruit GFX Library@1.11.9"
+          arduino-cli lib install "Adafruit SSD1306@2.5.9"
+          arduino-cli lib install TinyGPSPlus@1.0.3
 
       - name: Compile GPSBuddy
         run: |
