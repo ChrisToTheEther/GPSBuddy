@@ -1,4 +1,4 @@
-# GPS BUDDY
+# GPS BUDDY [![Compile Check ESP32 Firmware](https://github.com/ChrisToTheEther/GPSBuddy/actions/workflows/merge_check_main.yml/badge.svg)](https://github.com/ChrisToTheEther/GPSBuddy/actions/workflows/merge_check_main.yml)  [![Build & Release ESP32 Firmware](https://github.com/ChrisToTheEther/GPSBuddy/actions/workflows/release-GPSbuddy-esp32.yml/badge.svg)](https://github.com/ChrisToTheEther/GPSBuddy/actions/workflows/release-GPSbuddy-esp32.yml)
 
 A fun little ESP32-S3 GPS project that might evolve into a little tomogatchi GPS signal eater.
 
