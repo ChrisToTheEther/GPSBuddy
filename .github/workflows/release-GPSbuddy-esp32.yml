@@ -1,0 +1,56 @@
+name: Build & Release ESP32 Firmware
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'Release version (v1.0.0)'
+        required: true
+      prerelease:
+        description: 'Mark as prerelease'
+        type: boolean
+        default: false
+
+jobs:
+  build-and-release:
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: write   
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Arduino CLI
+        uses: arduino/setup-arduino-cli@v1
+
+      - name: Configure Arduino CLI for ESP32
+        run: |
+          arduino-cli config init
+          arduino-cli config set board_manager.additional_urls \
+            https://raw.githubusercontent.com/espressif/arduino-esp32/gh-pages/package_esp32_index.json
+
+      - name: Install ESP32 core
+        run: |
+          arduino-cli core update-index
+          arduino-cli core install esp32:esp32
+
+      - name: Install libraries
+        run: |
+          arduino-cli lib install TinyGPSPlus
+
+      - name: Compile GPSBuddy
+        run: |
+          arduino-cli compile \
+            --fqbn esp32:esp32:esp32 \
+            GPSBuddy
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ github.event.inputs.version }}
+          name: ${{ github.event.inputs.version }}
+          prerelease: ${{ github.event.inputs.prerelease }}
+          files: |
+            **/*.bin
