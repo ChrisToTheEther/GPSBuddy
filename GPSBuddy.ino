@@ -20,7 +20,7 @@ GPS TX → GPIO 44 ESP RX
 #include <TinyGPS++.h>
 #include <Wire.h>
 
-#include "gps_animations.h"
+#include "Scenes.h"
 
 // GPS
 #define GPS_RX 44
@@ -44,6 +44,10 @@ Adafruit_SSD1306 display(SCREEN_WIDTH, SCREEN_HEIGHT, &Wire, -1);
 void setup() {
   Serial.begin(115200);
 
+  // Buttons
+  pinMode(BUTTON1_PIN, INPUT_PULLUP);
+  pinMode(BUTTON2_PIN, INPUT_PULLUP);
+
   // GPS serial
   gpsSerial.begin(GPS_BAUD, SERIAL_8N1, GPS_RX, GPS_TX);
   Serial.println("GPS Serial started");
@@ -62,44 +66,15 @@ void setup() {
   display.setTextColor(SSD1306_WHITE);
 }
 
-static bool celebrating = true;
-static unsigned long lockTime = 0;
-
 void loop() {
-  while (gpsSerial.available()) {
-    gps.encode(gpsSerial.read());
+  handleNextButton();
+  handleBackButton();
+
+  if (currentScene != lastScene) {
+    display.clearDisplay();
+    lastScene = currentScene;
   }
 
-  if (gps.charsProcessed() < 10) {
-    drawSleepingCat();
-    return;
-  }
-
-  if (!gps.location.isValid()) {
-    drawSearching();
-    celebrating = true;
-    return;
-  }
-
-  if (celebrating) {
-    if (!lockTime) lockTime = millis();
-    drawCelebration();
-    if (millis() - lockTime > 2500) {
-      celebrating = false;
-      lockTime = 0;
-    }
-    return;
-  }
-
-  // Normal GPS display
-  display.setTextSize(1);
-  display.clearDisplay();
-  display.setCursor(0, 0);
-  display.print("LAT: ");
-  display.println(gps.location.lat(), 6);
-  display.print("LON: ");
-  display.println(gps.location.lng(), 6);
-  drawSignalBars(gps.satellites.value());
-  drawCatSprite(100, 40, cat_idle, gps.satellites.value());
-  display.display();
+  drawScene();
+  delay(50);
 }

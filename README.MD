@@ -2,9 +2,7 @@
 
 A fun little ESP32-S3 GPS project that might evolve into a little tomogatchi GPS signal eater.
 
-
 <img src="https://github.com/ChrisToTheEther/GPSBuddy/blob/main/GPSBuddyProto.png" alt="breadboard prototype" width="300" height="200">
-
 
 
 ## Arduino CLI commands:
@@ -30,15 +28,14 @@ arduino-cli lib search TinyGPSPlus
 
 arduino-cli lib install TinyGPSPlus
 
-
 ```
 
 ### compile
 
 ```bash
 arduino-cli compile \
-  --fqbn esp32:esp32:esp32 \
-  GPSBuddy
+  --fqbn esp32:esp32:esp32s3 \
+  .
 ```
 
 ### load
@@ -46,8 +43,8 @@ arduino-cli compile \
 ```bash
   arduino-cli upload \
   -p /dev/ttyUSB0 \
-  --fqbn esp32:esp32:esp32 \
-  GPSBuddy
+  --fqbn esp32:esp32:esp32s3 \
+  .
 ```
 
 ### compile + load
@@ -55,6 +52,6 @@ arduino-cli compile \
 ```bash
 arduino-cli compile -u -v \
   -p /dev/ttyUSB0 \
-  --fqbn esp32:esp32:esp32 \
-  GPSBuddy
+  --fqbn esp32:esp32:esp32s3 \
+  .
 ```
