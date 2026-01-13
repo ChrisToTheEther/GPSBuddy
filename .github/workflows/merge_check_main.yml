@@ -6,6 +6,7 @@ on:
       - main
     paths-ignore:
       - 'README.MD'
+      - '/3D_files/**'
   pull_request:
 
 jobs:
