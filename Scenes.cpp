@@ -179,6 +179,14 @@ void altScene() {
   display.display();
 }
 
+void eyesScene(){
+  display.setTextSize(1);
+    display.clearDisplay();
+    display.setCursor(0, 0);
+    drawSprite(64,32, eyes_idle); //rework drawCatSprite to just draw sprites
+    display.display();
+}
+
 void drawScene() {
   switch (currentScene) {
     case SCENE_GPS:
@@ -202,5 +210,7 @@ void drawScene() {
     case SCENE_ALT:
       altScene();
       break;
+    case SCENE_EYES:
+      eyesScene();
   }
 }

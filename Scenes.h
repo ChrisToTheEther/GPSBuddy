@@ -1,6 +1,7 @@
 #pragma once
 #include <Adafruit_SSD1306.h>
 #include <TinyGPS++.h>
+#include "animations.h"
 
 enum Scene {
   SCENE_GPS,
@@ -10,7 +11,8 @@ enum Scene {
   SCENE_HEADING,
   SCENE_SPEED,
   SCENE_ALT,
-  SCENE_COUNT
+  SCENE_EYES,
+  SCENE_COUNT // needs to be last
 };
 
 extern Scene currentScene;
@@ -34,3 +36,4 @@ void handleNextButton();
 void handleBackButton();
 
 void drawScene();
+void drawSprite();
