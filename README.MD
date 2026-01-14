@@ -4,6 +4,8 @@ A fun little ESP32-S3 GPS project that might evolve into a little tomogatchi GPS
 
 <img src="https://github.com/ChrisToTheEther/GPSBuddy/blob/main/GPSBuddyProto.png" alt="breadboard prototype" width="300" height="200">
 
+## ESP32-S3:
+https://wiki.seeedstudio.com/xiao_esp32s3_getting_started/
 
 ## Arduino CLI commands:
 
